@@ -1,0 +1,4 @@
+//manually added
+in package.json =>
+    "start": "node index.js" //to initiate => npm run start or npm start
+    "dev": "nodemon index.js" //to initiate => npm run dev

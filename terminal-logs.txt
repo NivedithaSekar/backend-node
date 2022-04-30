@@ -1,0 +1,50 @@
+PS C:\Users\Niveditha Sekar\Desktop\GUVI\backend-node> npm init -y
+Wrote to C:\Users\Niveditha Sekar\Desktop\GUVI\backend-node\package.json:
+
+{
+  "name": "backend-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+  },
+  "author": "",
+  "license": "ISC"
+}
+
+
+PS C:\Users\Niveditha Sekar\Desktop\GUVI\backend-node> node index.js     
+Hello, World!
+
+PS C:\Users\Niveditha Sekar\Desktop\GUVI\backend-node> git init
+Initialized empty Git repository in C:/Users/Niveditha Sekar/Desktop/GUVI/backend-node/.git/
+
+PS C:\Users\Niveditha Sekar\Desktop\GUVI\backend-node> npm i express
+
+added 57 packages, and audited 58 packages in 15s
+
+7 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+PS C:\Users\Niveditha Sekar\Desktop\GUVI\backend-node> node index.js
+Hello, Node!
+Started server on Port Number: 4000
+PS C:\Users\Niveditha Sekar\Desktop\GUVI\backend-node> node index.js
+Hello, Node!
+Started server on Port Number: 4000
+{}
+undefined
+
+//It is a dev-dependency used only in the development environment to automate the restarting of the server.
+PS C:\Users\Niveditha Sekar\Desktop\GUVI\backend-node> npm install --save-dev nodemon
+
+added 116 packages, and audited 174 packages in 30s
+
+23 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+PS C:\Users\Niveditha Sekar\Desktop\GUVI\backend-node>
