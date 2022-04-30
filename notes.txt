@@ -2,3 +2,16 @@
 in package.json =>
     "start": "node index.js" //to initiate => npm run start or npm start
     "dev": "nodemon index.js" //to initiate => npm run dev
+
+while posting the data, from body -> request -> json data -> Node JS doesnt know that it is a JSON which has to be converted to Javascript object.
+Express has a function that converts json to javascript object.
+Therefore, instead of mentioning to every API methods =>
+    app.post('/movies', express.json() ,async function (req, res)
+we commonly use =>
+    app.use(express.json()); //express.json() => inbuilt middleware
+
+npm i dotenv //To create a new environment variable
+create .env => and add this to gitignore (Key=Value)
+import dotenv from 'dotenv' & add dotenv.config();
+Value is available in => process.env 
+and can be retireve from process.env.Key
