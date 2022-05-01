@@ -1,7 +1,13 @@
+whatever changes we make while the server is running, it wont be reflected. 
+For that, We have to cut the server and re-run it.
+So this is a trouble to cut & re-reun the server for every changes..So to automate this install a package called nodemon
+npm i --save-dev nodemon
+
 //manually added
 in package.json =>
     "start": "node index.js" //to initiate => npm run start or npm start
     "dev": "nodemon index.js" //to initiate => npm run dev
+
 
 while posting the data, from body -> request -> json data -> Node JS doesnt know that it is a JSON which has to be converted to Javascript object.
 Express has a function that converts json to javascript object.
