@@ -4,7 +4,8 @@ import dotenv from 'dotenv';
 // Open locolhost:PORTNUMBER to view the below result
 dotenv.config();
 const app = express();
-const PORT = 4000;
+//Herokku - Auto assign port number & local - env port number
+const PORT = process.env.PORT;
 
 //local mongo URL
 //const MONGO_URL = "mongodb://localhost:27017";

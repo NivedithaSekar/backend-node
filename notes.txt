@@ -21,3 +21,8 @@ create .env => and add this to gitignore (Key=Value)
 import dotenv from 'dotenv' & add dotenv.config();
 Value is available in => process.env 
 and can be retireve from process.env.Key
+
+
+In Herokku, Port Number cannot be demanded. So after deploying the code, we receive error.
+So local env => put the port number
+Herokku => Port is autoassigned but DB has to be configured via settings(key:Value)
