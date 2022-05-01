@@ -1,6 +1,8 @@
 import express from 'express';
 import {MongoClient} from 'mongodb';
 import dotenv from 'dotenv';
+import cors from 'cors';
+
 // Open locolhost:PORTNUMBER to view the below result
 dotenv.config();
 const app = express();
@@ -18,7 +20,8 @@ async function createConnection(){
 }
 
 const client = await createConnection();
-app.use(express.json());
+app.use(express.json());//inbuilt middleware
+app.use(cors());//3rdparty middleware
 
 //similar to put,post,get,..methods
 app.get('/', function (req, res) {
