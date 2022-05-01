@@ -26,23 +26,27 @@ app.get('/', function (req, res) {
 
 
 app.listen(PORT,()=> console.log(`Started server on Port Number: ${PORT}`));
-//whatever changes we make while the server is running, it wont be reflected. 
-//For that, We have to cut the server and re-run it.
-//So this is a trouble to cut & re-reun the server for every changes..So to automate this install a package called nodemon
-//npm i --save-dev nodemon
 
+
+//READ - Get all the Movies/get all the filtered movies
 app.get('/movies', async function (req, res) { 
-    const movies = client.db('BWE29').collection('MovieDetails').find({});
-    console.log(movies);
-    console.log(req.query); //if we do have any query, to be considered. ex: ?rating=8
-    const {rating} = req.query;
-    console.log(rating);
+    //if we do have any query, to be considered. ex: ?rating=8
+    console.log(req.query); //if there are more than 1 parameter , this will return an object => {key:value, key:value,..}
+    let filter = req.query;
+    if(filter.rating){
+        filter.rating = +filter.rating;
+    }
+
+    //returns cursor - (Pagination) - MongoDB returns only first 20 records, to get further data-> type 'it'
+    //Aswe need array of objects -> toArray()
+    const allMovies = await client.db('BWE29').collection('MovieDetails').find(filter).toArray();
+    
     //const movie = movies.filter((movie) => movie.rating=== +rating); // filter returns array
     //const movie = movies.find((movie) => movie.id===id); // find returns the first matching element
-    const movie = await client.db('BWE29').collection('MovieDetails').findOne({rating:+rating});
-    rating ? res.send(movie) : res.send(movies);
+    res.send(allMovies);
 })
 
+//CREATE - Post the new Movie from body via request
 app.post('/movies', async function (req, res) { 
     const newMovies = req.body;
     console.log(newMovies);
@@ -50,12 +54,15 @@ app.post('/movies', async function (req, res) {
     res.send(result);
 })
 
+//DELETE - Delete the Movie by ID
 app.delete('/movies/:id', async function (req, res) { 
-    
-    const result = await client.db('BWE29').collection('MovieDetails').delete(newMovies);
-    res.send(result);
+    const {id} = req.params;
+    const result = await client.db('BWE29').collection('MovieDetails').deleteOne({id:id});
+    console.log(result,id);
+    result.deletedCount>0 ? res.send(result): res.status(404).send("No such movie found");
 })
 
+//READ - Get the Movie by ID
 app.get('/movies/:id', async function (req, res) { 
     console.log(req.params);
     const {id} = req.params;
@@ -65,4 +72,13 @@ app.get('/movies/:id', async function (req, res) {
     const movie = await client.db('BWE29').collection('MovieDetails').findOne({id:id});
     console.log(movie);
     movie ? res.send(movie) : res.status(404).send("No such movie found");
+})
+
+//UPDATE - Update/Put the Movie by ID
+app.put('/movies/:id', async function (req, res) { 
+    console.log(req.params);
+    const {id} = req.params;
+    const updatedMovie = req.body;
+    const result = await client.db('BWE29').collection('MovieDetails').updateOne({id:id},{$set:updatedMovie});
+    res.send(result);
 })
